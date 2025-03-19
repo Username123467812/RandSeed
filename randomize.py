@@ -15,7 +15,8 @@ def randomize():
     output_seed = output_seed // int(str(output_seed).count('0'))
     #cut output_seed down a little
     output_seed = math.ceil(output_seed // (input_seed ** 50))
-    output_seed = output_seed * math.ceil(math.sqrt(math.ceil(time.time()) + input_seed))
+    output_seed = output_seed * (math.ceil(time.time()) + (input_seed))
+    output_seed = output_seed * math.ceil(math.sqrt(input_seed) * 100000)
     
     return output_seed
 
