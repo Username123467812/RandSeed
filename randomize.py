@@ -1,7 +1,7 @@
 import time
 import math
 
-def randomize(input=0):
+def randomize(input=None):
     # Figure out file loading later, having trouble converting to string
     #file = open("random-data-set.txt","r")
     #print(file.read())
@@ -10,7 +10,7 @@ def randomize(input=0):
     output_seed = 0
 
     # check if there is a speicifed input seed
-    if input != 0:
+    if input != None:
         input_seed = input
 
     # starting stuff to make the number substantially bigger
@@ -21,11 +21,16 @@ def randomize(input=0):
     # cut output_seed down a little
     output_seed = math.ceil(output_seed // (input_seed ** 50))
 
-    # add in the current time in seconds (with some input seed mixed in)
+    # multiply in the current time in seconds (with some input seed mixed in)
     output_seed = output_seed * (math.ceil(time.time()) + (input_seed))
 
     # multiply in the (rounded) sqrt of input seed
     output_seed = output_seed * math.ceil(math.sqrt(input_seed) * 100000)
+
+    # save the output seed to use for the next randomization
+    save = open("randseed-previous.txt","w")
+    save.write(str(output_seed))
+    save.close()
     
     return output_seed
 
